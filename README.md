@@ -15,8 +15,8 @@
 + Data statistics Module
 
 ## Description of project
-1.1 电商项目基本业务概述
-1.2 电商后台管理系统的功能
+- 1.1 电商项目基本业务概述
+- 1.2 电商后台管理系统的功能
 
 
 
