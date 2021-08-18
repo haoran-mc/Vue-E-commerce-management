@@ -20,7 +20,7 @@
 
 ### 1.2 电商后台管理系统的功能
 
-![Functions overview](./images/Functions-overview.png)
+![Functions overview](./bin/images/Functions-overview.png)
 
 ### 1.3 电商后台管理系统的开发模式（前后端分离）
 
@@ -56,7 +56,13 @@ $ vue ui
 3. 配置 Vue 路由
 
 4. 配置 Element-UI 组件库
+
+在可视化面板中添加 `vue-cli-plugin-element` 插件
+
 5. 配置 axios 库
+
+在可视化面板中添加 `axios` 依赖
+
 6. 初始化 git 远程仓库
 7. 将本地项目托管到 Github 或 Gitee 中
 
