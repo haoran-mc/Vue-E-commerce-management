@@ -20,7 +20,7 @@
 
         <!-- 按钮 -->
         <el-form-item class="btns">
-          <el-button type="primary">登录</el-button>
+          <el-button type="primary" @click="login">登录</el-button>
           <el-button type="info" @click="resetLoginForm">重置</el-button>
         </el-form-item>
       </el-form>
@@ -55,6 +55,19 @@
       resetLoginForm () {
         /* console.log(this) */
         this.$refs.loginFormRef.resetFields()
+      },
+      login () {
+        // 表单的预验证，获取表单的引用对象，通过引用对象调用validate函数进行预校验
+        this.$refs.loginFormRef.validate(async valid => {
+          /* console.log(valid) */
+          if (!valid) return valid
+          // 请求地址需要后端提供，请求参数是this.loginForm
+          // 然后使用 await async 优化
+          const { data: res } = await this.$http.post('login', this.loginForm)
+          /* console.log(res) */
+          if (res.meta.status !== 200) return console.log('登录失败')
+          console.log('登录成功')
+        })
       }
     }
   }
