@@ -119,7 +119,33 @@ $ vue ui
 
 2. 创建 login 分支，在 login 分支上完成登录界面的功能
 
-3. 使用第三方图标
+3. 路由导航守卫控制访问权限
+
+如果用户没有登录，但是直接通过URL访问特定页面，需要重新导航到登录页面
+
+```javascript
+// 为路由对象，添加 beforeEach 导航守卫
+router.beforeEach((to, from, next) => {
+    // 如果用户访问的登录页，直接放行
+    if (to.path === '/login') return next()
+    // 从 sessionStorage 中获取到保存的 token 值
+    const tokenStr = window.sessionStorage.getItem('token')
+    // 没有token，强制跳转到登录页
+    if (!tokenStr) return next('/login')
+    next()
+})
+```
+
+### 3.4 退出
+
+退出功能实现原理：基于token的方式实现退出比较简单，只需要销毁本地的token即可。这样，后续的请求就不会携带token，必须重新生成一个新的token之后才能访问页面。
+
+```javascript
+// 清空 token
+window.sessionStorage.clear()
+// 跳转到登录页
+this.$router.push('/login')
+```
 
 ## 主页布局
 ## 用户管理模块
