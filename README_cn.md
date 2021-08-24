@@ -164,6 +164,27 @@ this.$router.push('/login')
 </el-container>
 ```
 
+### 4.2 美化头部区域
+
+### 4.3 左侧菜单布局
+
+```javascript
+<el-menu>
+  <el-submenu>
+    <i class="el-icon-menu"></i>
+    <span>一级菜单</span>
+    <el-menu-item>
+      <i class="el-icon-menu"></i>
+      <span slot="title">二级菜单</span>
+    </el-menu-item>
+  </el-submenu>
+
+  <el-submenu></el-submenu>
+  <el-submenu></el-submenu>
+  <el-submenu></el-submenu>
+</el-menu>
+```
+
 ## 用户管理模块
 ## 权限管理模块
 ## 分类管理模块
