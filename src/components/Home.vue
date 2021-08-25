@@ -45,10 +45,28 @@
 <script>
   export default {
     name: "Home",
+    data () {
+      return {
+        // 左侧菜单数据
+        menulist: []
+      }
+    },
+    created () {
+      this.getMenuList()
+    },
     methods: {
       logout () {
         window.sessionStorage.clear()
         this.$router.push('/login')
+      },
+
+      // 获取所有的菜单
+      async getMenuList () {
+        // 这里是后端提供
+        const { data: res } = await this.$http.get('menus')
+        if (res.meta.status !== 200) return this.$message.error()
+        this.menulist = res.data
+        /* console.log(res) */
       }
     }
   }
