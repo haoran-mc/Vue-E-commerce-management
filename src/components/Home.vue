@@ -21,6 +21,8 @@
           unique-opened
           :collapse="isCollapse"
           :collapse-transition="false"
+          :router="true"
+          default-active="activePath"
         >
           <!-- 一级菜单 -->
           <el-submenu :index="item.id + ''" v-for="item in menulist" :key="item.id">
@@ -33,7 +35,12 @@
             </template>
 
             <!-- 二级菜单 -->
-            <el-menu-item :index="subItem.id + ''" v-for="subItem in item.children" :key="subItem.id">
+            <el-menu-item
+              :index="'/' + subItem.path + ''"
+              v-for="subItem in item.children"
+              :key="subItem.id"
+              @click="saveNavState('/' + subItem.path)"
+            >
               <template slot="title">
                 <!-- 图标 -->
                 <i class="el-icon-menu"></i>
@@ -68,11 +75,14 @@
           145: 'iconfont icon-baobiao'
         },
         // 是否折叠
-        isCollapse: false
+        isCollapse: false,
+        // 被激活的链接地址
+        activePath: ''
       }
     },
     created () {
       this.getMenuList()
+      this.activePath = window.sessionStorage.getItem('activePath')
     },
     methods: {
       logout () {
@@ -86,12 +96,18 @@
         const { data: res } = await this.$http.get('menus')
         if (res.meta.status !== 200) return this.$message.error()
         this.menulist = res.data
-        /* console.log(res) */
+        console.log(res)
       },
 
       // 点击按钮，切换菜单的折叠与展开
       toggleCollapse () {
         this.isCollapse = !this.isCollapse
+      },
+
+      // 保存链接的激活状态
+      saveNavState (activePath) {
+        window.sessionStorage.setItem('activePath', activePath)
+        this.activePath = activePath
       }
     }
   }
