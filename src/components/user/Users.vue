@@ -60,8 +60,7 @@
         :page-sizes="[1, 2, 3, 5]"
         :page-size="queryInfo.pagesize"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
-      ></el-pagination>
+        :total="total"></el-pagination>
     </el-card>
 
     <!-- 添加用户的对话框 -->
